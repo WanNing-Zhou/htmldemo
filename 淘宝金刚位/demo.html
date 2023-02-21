@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            overflow: hidden;
+        }
+
+        .box{
+            background-color: white;
+            width: 400px;
+            height: 90px;
+            overflow: hidden;
+        }
+
+        .nav-box{
+
+            position: relative;
+            background-color: aquamarine;
+            width: 400px;
+            height: 76px;
+            overflow: hidden;
+        }
+
+
+        .nav-box-child{
+            position: absolute;
+            left: 0px;
+        }
+
+
+
+        .nav{
+            width: 800px;
+            display: flex;
+            height: 76px;
+            flex-direction: column;
+            flex-wrap: wrap
+        }
+
+        .icon{
+
+            background-color: skyblue;
+            width: 32px;
+            height: 32px;
+            margin-top: 4px;
+            border-radius: 32px;
+        }
+
+        .grow{
+            margin: auto;
+            width: 40px;
+            height: 10px;
+            border-radius: 10px;
+            background-color: purple;
+            position: relative;
+        }
+
+        .line{
+            width: 20px;
+            height: 10px;
+            position: absolute;
+            left: 0;
+            background-color: orange;
+            border-radius: 10px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <div class="nav-box">
+
+        <div class="nav-box-child">
+            <div class="nav">
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+                <div class="icon"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="grow">
+        <div class="line"></div>
+    </div>
+
+</div>
+
+<script>
+
+    let body = document.querySelector('body')
+    let box = document.querySelector('.box');
+    let navBox = document.querySelector('.nav-box');
+    let navBoxChild = document.querySelector('.nav-box-child');
+    let nav = document.querySelector('.nav');
+    let grow = document.querySelector('.grow');
+    let line = document.querySelector('.line');
+   /* nav.onmousedown = function(e){
+        nav.onmouseup = function(){
+            //清除事件
+            nav.onmouseup = null;
+            nav.onmousemove = null;
+        }
+        console.log('nav内,鼠标点击')
+        //e是点击事件的e , this是box元素的this
+        //因为当前物体是在文档的（0,0）位置，所以e.clientX(鼠标到文档的左侧距离) - this.offsetLeft(拖拽物left的值)就是鼠标到拖拽物的距离。
+        let x = e.clientX - this.offsetLeft;
+        let left = null;
+        nav.onmousemove = function(e){
+
+
+            left = navBoxChild.style.left; //获取左的值
+            // console.log('left',left)
+            if (!left){
+                left = 0;
+            }
+
+            // 获取鼠标移动后到文档左侧的距离 - 鼠标到拖拽物的距离 （就是移动后拖拽物的left值）
+            let a = e.clientX;
+            let l = a - x; //距离
+
+            left = parseInt(left) + l/100;
+            //边界值判断
+            if (left< -400){
+                left= -400
+            }
+            if (left>0)
+            {
+                left=0
+            }
+            navBoxChild.style.left = left +'px';  //拖拽物赋值
+            line.style.left = 0 - left/20+'px';
+            // img.style.clip = "rect(0px "+m+"px 500px 0px)";   //图片显示区域赋值
+        }
+
+    }*/
+
+    let x = 0;
+    let left = 0;
+    fn2 = (e)=>{
+        // console.log('滑动了')
+        left = navBoxChild.style.left; //获取左的值
+        console.log('left',left)
+        if (!left){
+            left = 0;
+        }
+
+        // 获取鼠标移动后到文档左侧的距离 - 鼠标到拖拽物的距离 （就是移动后拖拽物的left值）
+        let a = e.touches[0].pageX ;
+        let l = a - x; //距离
+        console.log('l',l)
+        left = parseInt(left) + l/50;
+        //边界值判断
+        if (left< -400){
+            left= -400
+        }
+        if (left>0)
+        {
+            left=0
+        }
+        navBoxChild.style.left = left +'px';  //拖拽物赋值
+        line.style.left = 0 - left/20+'px';
+    }
+    fn1 = (e)=>{
+        console.log('点击了')
+        console.log(e.touches[0].pageX)
+         x = e.touches[0].pageX ;
+        console.log('x',x)
+        nav.addEventListener('touchmove',fn2,false)
+        nav.addEventListener('touchend',()=>{
+            console.log('结束了')
+            nav.removeEventListener('touchend',fn1,false)
+            nav.removeEventListener('touchmove',fn2,false)
+        })
+
+    }
+
+    nav.addEventListener('touchstart',fn1,false)
+
+</script>
+</body>
+</html>
