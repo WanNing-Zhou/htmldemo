@@ -136,47 +136,11 @@
     let nav = document.querySelector('.nav');
     let grow = document.querySelector('.grow');
     let line = document.querySelector('.line');
-   /* nav.onmousedown = function(e){
-        nav.onmouseup = function(){
-            //清除事件
-            nav.onmouseup = null;
-            nav.onmousemove = null;
-        }
-        console.log('nav内,鼠标点击')
-        //e是点击事件的e , this是box元素的this
-        //因为当前物体是在文档的（0,0）位置，所以e.clientX(鼠标到文档的左侧距离) - this.offsetLeft(拖拽物left的值)就是鼠标到拖拽物的距离。
-        let x = e.clientX - this.offsetLeft;
-        let left = null;
-        nav.onmousemove = function(e){
 
 
-            left = navBoxChild.style.left; //获取左的值
-            // console.log('left',left)
-            if (!left){
-                left = 0;
-            }
 
-            // 获取鼠标移动后到文档左侧的距离 - 鼠标到拖拽物的距离 （就是移动后拖拽物的left值）
-            let a = e.clientX;
-            let l = a - x; //距离
-
-            left = parseInt(left) + l/100;
-            //边界值判断
-            if (left< -400){
-                left= -400
-            }
-            if (left>0)
-            {
-                left=0
-            }
-            navBoxChild.style.left = left +'px';  //拖拽物赋值
-            line.style.left = 0 - left/20+'px';
-            // img.style.clip = "rect(0px "+m+"px 500px 0px)";   //图片显示区域赋值
-        }
-
-    }*/
-
-    let x = 0;
+    //以下是手机touch事件
+    let x = 0; //存储touch时的位置
     let left = 0;
     fn2 = (e)=>{
         // console.log('滑动了')
@@ -186,11 +150,10 @@
             left = 0;
         }
 
-        // 获取鼠标移动后到文档左侧的距离 - 鼠标到拖拽物的距离 （就是移动后拖拽物的left值）
-        let a = e.touches[0].pageX ;
+        let a = e.touches[0].pageX ; //获得touchmove时的为hi在
         let l = a - x; //距离
-        console.log('l',l)
-        left = parseInt(left) + l/50;
+        // console.log('l',l)
+        left = parseInt(left) + l/50; //除法是为了让move距离更长,从而使拖拽距离变小
         //边界值判断
         if (left< -400){
             left= -400
@@ -200,7 +163,7 @@
             left=0
         }
         navBoxChild.style.left = left +'px';  //拖拽物赋值
-        line.style.left = 0 - left/20+'px';
+        line.style.left = 0 - left/20+'px'; // 滚动条滑动的距离, 盒子移动的距离按照比例取反
     }
     fn1 = (e)=>{
         console.log('点击了')
@@ -217,6 +180,45 @@
     }
 
     nav.addEventListener('touchstart',fn1,false)
+
+    //这个是鼠标事件
+    /* nav.onmousedown = function(e){
+    //清除事件
+         nav.onmouseup = function(){
+
+             nav.onmouseup = null;
+             nav.onmousemove = null;
+         }
+         console.log('nav内,鼠标点击')
+         let x = e.clientX
+         let left = null;
+         nav.onmousemove = function(e){
+
+
+             left = navBoxChild.style.left; //获取左的值
+             // console.log('left',left)
+             if (!left){
+                 left = 0;
+             }
+
+
+             let a = e.clientX;
+             let l = a - x; //距离
+
+             left = parseInt(left) + l/100;
+             //边界值判断
+             if (left< -400){
+                 left= -400
+             }
+             if (left>0)
+             {
+                 left=0
+             }
+             navBoxChild.style.left = left +'px';  //拖拽物赋值
+             line.style.left = 0 - left/20+'px'; //等比例缩放
+         }
+
+     }*/
 
 </script>
 </body>
