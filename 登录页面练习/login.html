@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <style>
+      body{
+        background-color: #4a374a;
+      }
+      #loginForm{
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform:translateX(-50%);
+      }
+
+      #logo{
+        font-size: 28px;
+        font-weight: 800;
+        color: white;
+        text-shadow: #ffffff 0px 0px 6px ;
+        position: absolute;
+        margin: auto;
+        left: 50%;
+        transform:translateX(-50%);
+        user-select: none;
+      }
+
+      #loginForm>form {
+        width: 100%;
+        position: absolute;
+        top: 60px;
+      }
+
+      #loginForm>form input{
+        padding: 4px 0 4px 10px;
+        width: 292px;
+        color: #757575;
+        background-color: #2d2d3f;
+        border-radius: 4px;
+        height:32px;
+        margin-bottom: 14px;
+        line-height: 14px;
+        border: 0;
+        border-bottom: 2px solid #4a485d;
+      }
+
+     #loginBtn{
+       width: 300px;
+       height: 40px;
+       background-color:#4a77d4;
+       color: #ffffff;
+       border-radius: 4px;
+       font-size: 18px;
+       border: 0; /*取出button原有样式*/
+       padding: 0;
+     }
+
+      #loginBtn:active{
+        transform: scale(0.98);
+      }
+
+    </style>
+</head>
+<body>
+
+  <div id="loginForm">
+      <div id="logo">
+        Login
+      </div>
+    <form action="#">
+        <input id="username" type="text" placeholder="用户名">
+        <input id="password" type="password" placeholder="密码 ">
+      <button id="loginBtn">登录</button>
+    </form>
+  </div>
+
+
+</body>
+</html>
