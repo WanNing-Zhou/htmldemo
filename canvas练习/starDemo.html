@@ -1,0 +1,70 @@
+生成一份完整的代码的话，可以参考以下代码：
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Canvas 五角星</title>
+</head>
+<body>
+<!-- 创建一个canvas元素 -->
+<canvas id="canvas" width="800" height="600"></canvas>
+<!-- 引入JavaScript代码 -->
+<script type="text/javascript">
+    // 定义一个函数，接受canvas元素，外圈半径，内圈半径，起始点坐标和填充颜色作为参数
+    function drawStar(canvas, R, r, x0, y0, color) {
+        // 获取绘图上下文
+        var ctx = canvas.getContext("2d");
+        // 计算五角星上10个点的坐标
+        var points = [];
+        for (var i = 0; i < 10; i++) {
+            // 计算每个点对应的弧度值
+            var radian = Math.PI / 180 * (18 + i * 36);
+            // 判断是外圈还是内圈
+            var radius = i % 2 === 0 ? R : r;
+            // 计算每个点的横纵坐标
+            var x = x0 + radius * Math.sin(radian);
+            var y = y0 - radius * Math.cos(radian);
+            // 将坐标存入数组中
+            points.push({x: x, y: y});
+        }
+        // 开始绘制路径
+        ctx.beginPath();
+        // 移动到第一个点A处
+        ctx.moveTo(points[0].x, points[0].y);
+        // 按照顺序连接其他9个点
+        for (var j = 1; j < points.length; j++) {
+            ctx.lineTo(points[j].x, points[j].y);
+        }
+        // 关闭路径
+        ctx.closePath();
+        // 设置填充颜色为参数指定的颜色
+        ctx.fillStyle = color;
+        // 填充路径区域，得到一个指定颜色的五角星
+        ctx.fill();
+    }
+
+    // 获取canvas元素
+    var canvas = document.getElementById("canvas");
+    // 获取画布的宽度和高度
+    var width = canvas.width;
+    var height = canvas.height;
+    // 定义一个颜色数组，用于随机选择填充颜色
+    var colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"];
+    // 使用循环生成100个星星
+    for (var k = 0; k < 100; k++) {
+        // 随机生成外圈半径和内圈半径，范围在10到50之间
+        var R = Math.floor(Math.random() * 40) + 10;
+        var r = Math.floor(Math.random() * 40) + 10;
+        // 随机生成起始点坐标，范围在画布内
+        var x0 = Math.floor(Math.random() * (width - 2 * R)) + R;
+        var y0 = Math.floor(Math.random() * (height - 2 * R)) + R;
+        // 随机选择一个颜色作为填充颜色
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        // 调用之前定义的函数，绘制一个星星
+        drawStar(canvas, R, r, x0, y0, color);
+    }
+</script>
+</body>
+</html>
+```
