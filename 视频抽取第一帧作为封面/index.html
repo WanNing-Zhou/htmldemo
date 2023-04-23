@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<video preload="auto" onloadeddata="setCover(this)" width="200" height="200" controls>
+    <source src="mixkit-stars-in-space-background-1610-large.mp4">
+</video>
+<img width="300px" height="300px" class="kk" alt="">
+<video preload="auto" width="320" height="240" controls>
+    <source src="mixkit-stars-in-space-background-1610-large.mp4">
+</video>
+<script>
+    let kk = document.querySelector('.kk');
+    function setCover(that) {//加载完成事件，调用函数
+        var canvas = document.createElement("canvas");//canvas画布
+        canvas.width = that.videoWidth
+        canvas.height = that.videoHeight
+        canvas.getContext('2d').drawImage(that, 0, 0, canvas.width, canvas.height);//画图
+        kk.setAttribute("src",canvas.toDataURL("image/png"))
+        that.setAttribute("poster", canvas.toDataURL("image/png"));
+    }
+</script>
+</body>
+</html>
